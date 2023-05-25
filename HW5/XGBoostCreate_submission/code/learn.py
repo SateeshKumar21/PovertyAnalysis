@@ -64,7 +64,7 @@ def train_boosted_trees(D):
     return styled_logs
 
 if __name__=='__main__':
-    Yaml = yaml.safe_load(open('../config.yaml', 'r'))
+    Yaml = yaml.safe_load(open('../../config.yaml', 'r'))
 
     T=timer()
     depth=8   #for KDTree

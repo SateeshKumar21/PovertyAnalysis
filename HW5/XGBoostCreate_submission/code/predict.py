@@ -30,8 +30,8 @@ class timer:
 
 
 T=timer()
-            
-Yaml = yaml.safe_load(open('../config.yaml', 'r'))
+
+Yaml = yaml.safe_load(open('../../config.yaml', 'r'))
 image_dir="../../../" + Yaml['data_path']
 depth=8   #for KDTree
 
