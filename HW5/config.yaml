@@ -1,3 +1,2 @@
-data_path: /Users/yoavfreund/datasets/poverty_v1.1/anon_images/
-#use the following line when running on datahub
-#poverty_dir = '/dsmlp/datasets/cs255-sp22-a00-public/poverty/anon_images/'
+data_path: ../resource/asnlib/publicdata/anon_images/
+poverty_dir: ../resource/asnlib/publicdata/anon_images/
