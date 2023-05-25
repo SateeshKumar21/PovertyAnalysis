@@ -66,8 +66,8 @@ class KD_node:
             Vol*=(_max-_min)
         self.density=data.shape[0]/(Vol+0.001)
         return self.density
-
-def train_encoder(files,max_images=200):
+    
+def train_encoder(files,max_images=200,tree_depth=8):
     """Train an encoding tree using a set of images
     If there are more than man_images image, choose max_images from them 
     by selecting at random w/o replacement"""
@@ -78,24 +78,72 @@ def train_encoder(files,max_images=200):
     else:
         I = choice(range(_len),max_images,replace=False)
         selected_files=[files[i] for i in I]
-        print(len(selected_files))
+    print('used %d images to train KDTree'%len(selected_files))
 
     Plist=[]
     for  i in range(len(selected_files)):
         M=load(selected_files[i])
         Image=M['x']
-        pixels=Image.reshape((8, -1)).T
+        pixels=Image.reshape((Image.shape[0], -1)).T
         Plist.append(pixels)
     data=concatenate(Plist,axis=0)
 
+    print('KDTree training data shape=',data.shape)
+    
     ## train tree
     train_size=data.shape[0]
-    tree=KD_tree(data,depth=8)
+    tree=KD_tree(data,depth=tree_depth)
     return train_size,tree
 
 def encode_image(file,tree):
     M=load(file)
     Image=M['x']
-    pixels=Image.reshape((8, -1)).T
+    pixels=Image.reshape((Image.shape[0], -1)).T
     code=tree.calc_encoding(pixels)
     return code
+
+class encoded_dataset:
+
+    def __init__(self,image_dir,df,tree,depth=8,label_col='rich'):
+
+        def bin2int(c):
+            ans=0
+            for j in range(len(c)):
+                bit=int(c[-(j+1)])
+                ans+=bit*(2**j)
+            return ans
+  
+        self.df=df
+        self.rows=df.shape[0]
+        self.cols=2**(depth+1)+1
+        data=zeros([self.rows,self.cols]) #code length +1 for label
+
+        j=0
+        for filename,row in df.iterrows():
+            filepath=f"{image_dir}/{filename}"
+            code = encode_image(filepath,tree)
+
+            V=zeros(self.cols-1)
+            for c,a in code:
+                V[bin2int(c)]=a
+
+            label=row[label_col]*1
+
+            data[j,-1]=label
+            data[j,:-1]=V
+
+            if((j+1) %10==0):
+                print(j,filename,end='\r')
+            j+=1
+
+        self.data=data
+
+    def get_df(self):
+        return self.df
+
+    def get_slice(self,selection):
+        assert selection.shape[0] == self.data.shape[0]
+        S=data[selection,:]
+        return S
+        
+
