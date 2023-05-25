@@ -16,6 +16,7 @@ import pandas as pd
 import pickle as pkl
 import sys
 from time import time
+import yaml
 class timer:
     def __init__(self):
         self.t0=time()
@@ -30,8 +31,8 @@ class timer:
 
 T=timer()
             
-poverty_dir=sys.argv[1]
-image_dir=poverty_dir+'anon_images/'
+Yaml = yaml.safe_load(open('../config.yaml', 'r'))
+image_dir="../../../" + Yaml['data_path']
 depth=8   #for KDTree
 
 import pickle as pkl
@@ -56,7 +57,7 @@ for fold_i in range(len(folds)):
     fold=folds[fold_i]
 
     #load table entries
-    test_csv=f'../public_tables/{fold["in"]}'
+    test_csv=f'../../../{Yaml["path"]}/{fold["in"]}'
     test=pd.read_csv(test_csv,index_col=0)
     test.index=test['filename']
     test.shape
