@@ -27,14 +27,12 @@ So, there are 3 csv files:
 Note, random test set is an easier one and follows the same distribution as the train set. Country test set is harder as it consists of countries that you will not encounter in the train set. 
 
 
-## Starting points 
-We provide working solutions to the HW, on which you are expected to improve. These starting points are provided in [this GitHub repository](https://github.com/SateeshKumar21/PovertyAnalysis).
+## Starting Point 
+We provide a working solution to the HW, on which you are expected to improve. This starting point is provided in [this GitHub repository](https://github.com/SateeshKumar21/PovertyAnalysis).
 
-The starting points include a solution based on KDTree pre-processing + XGBoost.
+The starting point includes a solution based on KDTree pre-processing + XGBoost. You can run the solution on Datahub/Vocareum, but it would run on most laptops/work-stations as well.
 
-We also encourage the students to explore Convolutional Neural Networks for this task. The students should be able to utilize GPUs on Datahub/Vocareum in order to do so. The XGBoost solution on the other hand can be run on most laptops/work-stations.
-
-## Performance evaluations
+## Performance Evaluations
 We will evaluate you on two different test sets using two different metrics.
 
 The first metric is **asymmetric loss**. We assign weights to your predictions. That is, for every wrong prediction (poor classified as wealthy or vice versa), you get -2. For every correct prediction, you get +1. You can also give a prediction as “I don’t know” for which you get 0. We sum all these points and divide by the total number of test images.
