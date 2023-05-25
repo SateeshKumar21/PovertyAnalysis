@@ -3,34 +3,28 @@ In this final project, we study classification in the context of the [Poverty da
 
 The goal of this project is to classify poor vs. wealthy regions in Africa based on satellite imagery. There are `~20,000` images covering `23` countries in Africa.
 
-The satellite images are of the shape `224 X 224 X 8`. Each pixel corresponds to a `30m X 30m` area and each image corresponds to a `6.7km X 6.7km` square. To see some sample images, see [this notebook](<https://github.com/SateeshKumar21/PovertyAnalysis/tree/main/HW5/Pre-processing/2.browse images.ipynb>). 
+The satellite images are of the shape `224 X 224 X 8`. Each pixel corresponds to a `30m X 30m` area and each image corresponds to a `6.7km X 6.7km` square. To see some sample images, see [this notebook](https://github.com/SateeshKumar21/PovertyAnalysis/blob/Vocareum/HW5/Pre-processing/2.browse%20images.ipynb). 
 
-This dataset comprises images from both urban and rural areas. In general, urban areas are significantly more wealthy than rural areas. See [this notebook](<https://github.com/SateeshKumar21/PovertyAnalysis/tree/main/HW5/Pre-processing/2.browse images.ipynb>) for details. To make the problem into a classification task, we define a threshold on the wealth that separates the poor from wealthy. As there is a large difference between rural and urban, we use a different threshold for each subset. Rural images with wealth less than -0.5 are labeled as poor and greater than -0.5 as wealthy. Similarly, we pick a threshold of 1.3 for urban images.
+This dataset comprises images from both urban and rural areas. In general, urban areas are significantly more wealthy than rural areas. See [this notebook](https://github.com/SateeshKumar21/PovertyAnalysis/blob/Vocareum/HW5/Pre-processing/2.browse%20images.ipynb) for details. To make the problem into a classification task, we define a threshold on the wealth that separates the poor from wealthy. As there is a large difference between rural and urban, we use a different threshold for each subset. Rural images with wealth less than -0.5 are labeled as poor and greater than -0.5 as wealthy. Similarly, we pick a threshold of 1.3 for urban images.
 
 
 ## Dataset 
-You can find the image files at the following location:
-1. DataHub: TBD
-2. Vocareum: 
-   - `Poverty Analysis Spring 2023/resource/asnlib/publicdata/anon_images/`
-   - `Poverty Analysis Spring 2023/resource/asnlib/publicdata/train.csv`
-   - `Poverty Analysis Spring 2023/resource/asnlib/publicdata/random_test_reduct.csv`
-   - `Poverty Analysis Spring 2023/resource/asnlib/publicdata/country_test_reduct.csv`
+You can find the image files at the following location: `Poverty Analysis Spring 2023/resource/asnlib/publicdata/anon_images/`
 
 All files (train and test) are stored inside this folder in npz format. We divided this dataset into one train and 2 test sets. We separated out ~25% of the data to build a countries test set (`Country_test_reduct.csv`) s.t. the test countries that are not present in the training set. In the random test set, we separated 25% of the instances at random from the remaining 75% of data to generate a random test set (`Random_test_reduct.csv`).
 
 So, there are 3 csv files:
-1. `train.csv`: Ground truth for the training dataset. Use the column `label` to train your models.
-2. `Country_test_reduct.csv`: Country test set. You have all the same columns as `train.csv` except for `label` and `wealthpooled`.
-3. `Random_test_reduct.csv`: Random test set. You have all the same columns as `train.csv` except for `label` and `wealthpooled`.
+1. `Poverty Analysis Spring 2023/resource/asnlib/publicdata/train.csv`: Ground truth for the training dataset. Use the column `label` to train your models.
+2. `Poverty Analysis Spring 2023/resource/asnlib/publicdata/Country_test_reduct.csv`: Country test set. You have all the same columns as `train.csv` except for `label` and `wealthpooled`.
+3. `Poverty Analysis Spring 2023/resource/asnlib/publicdata/Random_test_reduct.csv`: Random test set. You have all the same columns as `train.csv` except for `label` and `wealthpooled`.
 
 Note, random test set is an easier one and follows the same distribution as the train set. Country test set is harder as it consists of countries that you will not encounter in the train set. 
 
 
 ## Starting Point 
-We provide a working solution to the HW, on which you are expected to improve. This starting point is provided in [this GitHub repository](https://github.com/SateeshKumar21/PovertyAnalysis).
+We provide a working solution to the HW, on which you are expected to improve. This starting point is provided in [this GitHub repository](https://github.com/SateeshKumar21/PovertyAnalysis/tree/Vocareum).
 
-The starting point includes a solution based on KDTree pre-processing + XGBoost. You can run the solution on Datahub/Vocareum, but it would run on most laptops/work-stations as well.
+The starting point includes a solution based on KDTree pre-processing + XGBoost. You can run the solution on Vocareum, but it would run on most laptops/work-stations as well.
 
 ## Performance Evaluations
 We will evaluate you on two different test sets using two different metrics.
@@ -49,13 +43,8 @@ You will be evaluated on your overall best result for any of the competitions.
 
 
 ## Compute Resources
-#### DataHub
-The training of the models can be done on Datahub. There is a separate container allocated for you with GPU support and PyTorch CUDA integrated.
-
-Container Name: `ucsdets/scipy-ml-notebook (8 CPU, 16G RAM, 1 GPU)`
-
 #### Vocareum
-TBD
+To access the assignment, please log in to [Vocareum](https://labs.vocareum.com/main/main.php) under the class DSC 232R. The assignment name is **Poverty Analysis Spring 2023**.
 
 ## How to Use the Autograder
 
@@ -77,7 +66,7 @@ Each csv file should have the following columns:
 - `pred_wo_abstention` - predictions of `-1`, `1` 
 
 ## Startup Code
-Github repo: [Poverty Analysis](https://github.com/SateeshKumar21/PovertyAnalysis)
+Github repo: [Poverty Analysis](https://github.com/SateeshKumar21/PovertyAnalysis/tree/Vocareum)
 
 The repository contains a baseline which uses XGBoost. 
 
