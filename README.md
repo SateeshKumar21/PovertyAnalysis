@@ -33,13 +33,11 @@ The first metric is **asymmetric loss**. We assign weights to your predictions. 
 
 The second metric is **symmetric loss**. This is similar to the asymmetric loss but with a wrong prediction penalty of -1. 
 
-We have 4 competitions:
+We have 2 competitions:
 1. Test on random test set using symmetric loss.
-2. Test on random test set using asymmetric loss.
-3. Test on countries test set using symmetric loss.
-4. Test on countries test set using asymmetric loss.
+2. Test on countries test set using asymmetric loss.
 
-You will be evaluated on your overall best result for any of the competitions.
+Each competition has a separate leaderboard.
 
 
 ## Compute Resources
@@ -55,7 +53,7 @@ Go to `HW Assignment 5` and submit your files. You will be re-routed to a page w
 There are four files to submit:
 1. `results.csv` — your predictions on the random test set 
 2. `results_country.csv` — your predictions on the country test set 
-3. `code.zip` or `code.tgz` — your code in a zip file
+3. `code.zip` or `code.tgz` — your code in a zip file, max size of zip file is 10MB.
 4. `explanation.md` - your explanation for your implementation
 
 Each csv file should have the following columns:
