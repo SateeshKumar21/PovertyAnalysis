@@ -31,8 +31,7 @@ class timer:
 
 T=timer()
 
-Yaml = yaml.safe_load(open('../../config.yaml', 'r'))
-image_dir="../../../" + Yaml['data_path']
+image_dir="../../../../../resource/asnlib/publicdata/anon_images/"
 depth=8   #for KDTree
 
 import pickle as pkl
@@ -57,7 +56,7 @@ for fold_i in range(len(folds)):
     fold=folds[fold_i]
 
     #load table entries
-    test_csv=f'../../../{Yaml["path"]}/{fold["in"]}'
+    test_csv=f'../../../../../resource/asnlib/publicdata/{fold["in"]}'
     test=pd.read_csv(test_csv,index_col=0)
     test.index=test['filename']
     test.shape

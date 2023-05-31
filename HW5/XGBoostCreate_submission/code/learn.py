@@ -64,20 +64,16 @@ def train_boosted_trees(D):
     return styled_logs
 
 if __name__=='__main__':
-    Yaml = yaml.safe_load(open('../../config.yaml', 'r'))
-
     T=timer()
     depth=8   #for KDTree
 
     ## load file list
-    image_dir="../../../" + Yaml['data_path']
-
-
+    image_dir="../../../../../resource/asnlib/publicdata/anon_images/"
     files=glob(f'{image_dir}/*.npz')
     print(f'found {len(files)} files')
 
     T.mark('listed files')
-    train_table="../../../"+Yaml['path']+'train.csv'
+    train_table="../../../../../resource/asnlib/publicdata/train.csv"
     df=pd.read_csv(train_table,index_col=0)
     df.index=df['filename']
 
