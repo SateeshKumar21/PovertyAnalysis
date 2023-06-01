@@ -14,22 +14,6 @@ class KD_tree:
         """calculate a log ratio encoding for a new set of vectors (=image)"""
         data_size=data.shape[0]
         return self.root.calc_encoding(data,data_size)
-    
-    def print(self,node=0,level=2):
-        """ print level levels of tree starting at node for level layers """
-        if node==0:
-            node=self.root
-
-        l=0
-        next_lst=[]
-        lst=[node]
-        while l<level:
-            for n in lst:
-                print(n)
-                next_lst+=[n.above,n.below]
-            l+=1
-            lst=next_lst
-            next_lst=[]
 
 class KD_node:
     """ the main class in the implementation of KD-tree, encodes a single node in the tree"""
@@ -56,11 +40,6 @@ class KD_node:
             self.above=KD_node(tree,above,path=self.path+[1],depth=depth)
             self.below=KD_node(tree,below,path=self.path+[0],depth=depth)
 
-    def __str__(self):
-        answer='%s: size=%d index=%d, threshold= %6.2f'%(self.read_path,self.size\
-                                                        ,self.index,self.threshold)
-        return answer
-    
     def calc_encoding(self,data,full_data_size,limit=100,smooth=1e-7):
         """Use trained tree to encode an individual dataset (image)"""
         my_prob=data.shape[0]/full_data_size
@@ -126,13 +105,6 @@ def encode_image(file,tree):
 class encoded_dataset:
 
     def __init__(self,image_dir,df,tree,depth=8,label_col='rich'):
-        """ Generate a tree based encoding for a set of images.
-        image_dir: location of images
-        df: dataframe with information about each image including label
-        tree: the tree used for encoding
-        depth: the number of tree levels to be used.
-        label_col: title of column containing the label.
-        """
 
         def bin2int(c):
             ans=0
@@ -147,11 +119,10 @@ class encoded_dataset:
         data=zeros([self.rows,self.cols]) #code length +1 for label
 
         j=0
-        self.codes=[]
         for filename,row in df.iterrows():
             filepath=f"{image_dir}/{filename}"
             code = encode_image(filepath,tree)
-            self.codes.append(code)
+
             V=zeros(self.cols-1)
             for c,a in code:
                 V[bin2int(c)]=a
